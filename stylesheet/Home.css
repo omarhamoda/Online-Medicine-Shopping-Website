@@ -1,0 +1,39 @@
+
+.goods {
+    overflow: hidden;
+    width: 400px;
+    height: 500px;
+    margin: 25px;
+    word-wrap:normal;
+    float: left;
+    margin-left: 60px;
+    border-radius: 20px;
+    border: 2px solid rgb(163, 33, 33);
+    color: white;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.goods:hover {
+    border: 2px solid white;
+}
+
+.goods img {
+    width: 399px;
+    height: 250px;
+}
+
+.goods h2 {
+    color: gold;
+    border: 2px solid rgb(163, 33, 33);
+    margin-top: 10px;
+    margin: 10px auto;
+    padding: 10px;
+    width: 200px;
+    border-radius: 20px;
+}
+
+.goods p {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 25;
+}
