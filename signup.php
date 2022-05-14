@@ -1,35 +1,28 @@
 <?php 
         include_once "header.php";
-        session_start();
+        include_once "classes/Validation.php";
+        include_once "classes/Add.php";
+        include_once "classes/LoginAndRegistration.php";
+        $validation = new Validation();
+        $register = new Account();
+        $login = new Login();
         if(isset($_POST['submit'])) {
-            $signup = false;
-            if (!empty($_POST['fname']) && !empty($_POST['lname']) && !empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['email']) && !empty($_POST['phone']) && !empty($_POST['password-repeat'])) {
-                if (strlen($_POST['username']) > 5 && strlen($_POST['username']) < 16 && strlen($_POST['password']) > 7) {
-                    if (strcmp($_POST['password'], $_POST['password-repeat']) == 0){
-                        include "classes.php";
-                        $user = new User();
-                        $signup = $user->signup($_POST['fname'], $_POST['lname'], $_POST['username'], $_POST['password'], $_POST['email'], $_POST['phone'], '2021-08-07');
+            $dataForValidation = array($_POST['fname'], $_POST['lname'], $_POST['username'], $_POST['password'], $_POST['phone'], $_POST['address'], $_POST['password-repeat']);
+            $dataForRegister = array($_POST['fname'], $_POST['lname'], $_POST['username'], $_POST['password'], $_POST['phone'], $_POST['address']);
+            if ($validation->checkRegistrationFormFields($dataForValidation)) {
+                if ($validation->checkUsernamePasswordMinLength($dataForValidation)) {
+                    if ($validation->checkPasswordConfirmation($dataForValidation)){
+                        $register->add($dataForRegister);
+                        $login->setLogInInfo($_POST['username'], $_POST['password']);
+                        header('location: Home.php');
                     } else {
-                        echo '<h4 class = "signuperror" style = "margin-left: 700px; margin-top: 30px; color: red;">كلمة السر غير متطابقة</h4>';
+                        echo '<h4 class = "signuperror" style = "margin-left: 700px; margin-top: 30px; color: red;">Wrong Password Confirmation</h4>';
                     }
                 } else {
-                    echo '<h4 class = "signuperror" style = "margin-left: 560px; margin-top: 30px; color: red;">يجب ان يكون اسم المستخدم اكبر من 5 ولا يزيد عن 15 احرف وكلمة السر 8 او اكبر</h4>';
+                    echo '<h4 class = "signuperror" style = "margin-left: 560px; margin-top: 30px; color: red;">Username must be greater than 5 and less than 16 and password > or = 8</h4>';
                 }
             } else {
-                echo '<h4 class = "signuperror" style = "margin-left: 740px; margin-top: 30px; color: red;">حقل فارغ</h4>';
-            }
-            if($signup) {
-                include "DBconnect.php";
-                $sql = "SELECT `id` FROM `account` where `username` = '". $_POST['username'] ."'";
-                $query = mysqli_query($con, $sql);
-                $result = mysqli_fetch_all($query, MYSQLI_ASSOC);
-                foreach($result as $account) {
-                    setcookie("id", $account['id'], time() + (86400 * 1000), '/');
-                }
-                setcookie("username", $_POST['username'], time() + (86400 * 1000), '/');
-                setcookie("password", $_POST['password'], time() + (86400 * 1000), '/');
-                setcookie("fname", $_POST['fname'], time() + (86400 * 1000), '/');
-                header('location: Home.php');
+                echo '<h4 class = "signuperror" style = "margin-left: 740px; margin-top: 30px; color: red;">Empty Field</h4>';
             }
         }
 ?>
@@ -48,8 +41,8 @@
             <input type = "text" name = "fname" placeholder = "First Name...">
             <input type = "text" name = "lname" placeholder = "Last Name ...">
             <input type = "text" name = "username" placeholder = "User Name ...">
-            <input type = "text" name = "email" placeholder = "Gmail...">
             <input type = "number" name ="phone" placeholder = "Phone Number ...">
+            <input type = "text" name = "address" placeholder = "Address...">
             <input type = "text" name = "password" placeholder = "Password ...">
             <input type = "text" name = "password-repeat" placeholder = "Repeat Password ...">
             <button type = "submit" name = "submit" id = "butt">Register</button>
