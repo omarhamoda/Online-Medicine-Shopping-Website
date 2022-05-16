@@ -1,15 +1,10 @@
 <?php 
-    include_once "header.php";
     if(isset($_POST['submit'])) {
-        include "classes.php";
-        $user = new User();
-        $login = $user->login($_POST['username'], $_POST['password']);
-        if ($login) {
-            header("Location: Home.php");
-        } else {
-            echo '<h4 style = "margin-left: 670px; margin-top: 30px; color: red;">خطأ في اسم المستخدم او كلمة السر</h4>';
-        }
+        include "Controllers/LoginController.php";
+        $user = new LoginController();
+        echo $user->loginn($_POST['username'], $_POST['password']);
     }
+    include_once "header.php";
 ?>
 <html lang="en">
 <head>
