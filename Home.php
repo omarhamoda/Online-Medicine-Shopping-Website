@@ -1,8 +1,8 @@
 
 <?php
     include_once "header.php";
-    include_once "classes/Print.php";
-    $products = new PrintProduct();
+    include_once "controllers/ProductController.php";
+    $products = new ProductController();
 ?>
 
 <html lang="en">
@@ -14,7 +14,7 @@
     <title>Products</title>
 </head>
 <body>
-    <?php foreach ($products->PrintAll() as $product) { ?>
+    <?php foreach ($products->viewProducts() as $product) { ?>
             <a href = "View.php?id=<?php echo $product['id']; ?>"><div class = "products" >
                 <h3><?php echo $product['name']; ?></h3>
                 <img src = "data:image/jpeg;base64, <?php echo base64_encode($product['picture']) ?>" width = "399px" height= "250px">

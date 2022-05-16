@@ -1,8 +1,10 @@
 
 <?php
     include_once "header.php";
-    include_once "classes/ProductModel.php";
-    $product = new ProductModel();
+    include_once "controllers/ProductController.php";
+    include_once "controllers/ValidationController.php";
+    $productt = new ProductController();
+    $validation = new ValidationController();
 ?>
 
 <html lang="en">
@@ -13,19 +15,17 @@
     <link rel = "stylesheet" href = "stylesheet/ViewProduct2.css">
     <title>
         <?php
-            echo $product->getProductName($_GET['id']);
+            echo $productt->viewProductName($_GET['id']);
         ?>
     </title>
 </head>
 <body>
-    <?php foreach ($product->getProductDetails($_GET['id']) as $product) { ?>
+    <?php foreach ($productt->viewProductDetails($_GET['id']) as $product) { ?>
         <div class = "ViewGoods1">
            <img src = "data:image/jpeg;base64,<?php echo base64_encode($product['picture'])?>" width = "380px" height= "350px">
         </div>
         <?php if(isset($_COOKIE['username']) && isset($_COOKIE['password'])) { ?>
-            <?php include_once "classes/Validation.php";
-                $validation = new Validation();
-                if ($validation->checkAccountPermissions() == "admin") { ?>
+            <?php if ($validation->checkAccountPermissions() == "admin") { ?>
                     <div class = "ViewGoods2">
                         <a href = "update-products.php?id=<?php echo $_GET['id'];?>"><button id = "butt1">Update</button></a>
                         <a href = "delete-products.php?id=<?php echo $_GET['id'];?>"><button id = "butt2">Delete</button></a>
