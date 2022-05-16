@@ -1,0 +1,46 @@
+
+.Cart {
+    width: 400px;
+    background:white;
+    margin: 80px auto;
+    border-radius: 15px;
+    border: 2px solid rgb(163, 33, 33);
+}
+
+.Product {
+    height: 20px;
+    margin: 10px auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: 2px solid rgba(40, 40, 40, 0.186);
+    box-shadow: 0px 5px 5px rgba(35, 34, 34, 0.41);
+}
+
+.Product #name {
+    float:left;
+}
+
+.Product #price {
+    float:right;
+}
+
+.Cost #totalCost {
+    margin: 10px auto;
+}
+
+.Order input{
+    background: none;
+    border: 2px solid rgb(163, 33, 33);
+    border-radius: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    transition: 0.2s;
+}
+
+.Order input:hover{
+    color: white;
+    border: 2px solid white;
+    background: rgb(163, 33, 33);
+
+}
