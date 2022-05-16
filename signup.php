@@ -1,28 +1,18 @@
 <?php 
         include_once "header.php";
-        include_once "classes/Validation.php";
+        include_once "controllers/ValidationController.php";
         include_once "classes/Add.php";
-        include_once "classes/LoginAndRegistration.php";
-        $validation = new Validation();
+        include_once "controllers/LoginController.php";
+        $validation = new ValidationController();
         $register = new Account();
-        $login = new Login();
+        $login = new LoginController();
         if(isset($_POST['submit'])) {
             $dataForValidation = array($_POST['fname'], $_POST['lname'], $_POST['username'], $_POST['password'], $_POST['phone'], $_POST['address'], $_POST['password-repeat']);
             $dataForRegister = array($_POST['fname'], $_POST['lname'], $_POST['username'], $_POST['password'], $_POST['phone'], $_POST['address']);
-            if ($validation->checkRegistrationFormFields($dataForValidation)) {
-                if ($validation->checkUsernamePasswordMinLength($dataForValidation)) {
-                    if ($validation->checkPasswordConfirmation($dataForValidation)){
-                        $register->add($dataForRegister);
-                        $login->setLogInInfo($_POST['username'], $_POST['password']);
-                        header('location: Home.php');
-                    } else {
-                        echo '<h4 class = "signuperror" style = "margin-left: 700px; margin-top: 30px; color: red;">Wrong Password Confirmation</h4>';
-                    }
-                } else {
-                    echo '<h4 class = "signuperror" style = "margin-left: 560px; margin-top: 30px; color: red;">Username must be greater than 5 and less than 16 and password > or = 8</h4>';
-                }
-            } else {
-                echo '<h4 class = "signuperror" style = "margin-left: 740px; margin-top: 30px; color: red;">Empty Field</h4>';
+            if ($validation->checkAllAccountValidations($dataForValidation)) {
+                $register->add($dataForRegister);
+                $login->setLogInInfo($_POST['username'], $_POST['password']);
+                header('location: Home.php');
             }
         }
 ?>
