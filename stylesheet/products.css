@@ -1,5 +1,5 @@
 
-.goods {
+.products {
     overflow: hidden;
     width: 400px;
     height: 500px;
@@ -14,16 +14,16 @@
     transition: 0.3s;
 }
 
-.goods:hover {
+.products:hover {
     border: 2px solid white;
 }
 
-.goods img {
+.products img {
     width: 399px;
     height: 250px;
 }
 
-.goods h2 {
+.products h2 {
     color: gold;
     border: 2px solid rgb(163, 33, 33);
     margin-top: 10px;
@@ -33,7 +33,7 @@
     border-radius: 20px;
 }
 
-.goods p {
+.products p {
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 25;
 }
