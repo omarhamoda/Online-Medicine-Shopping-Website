@@ -1,6 +1,7 @@
 <?php
-    include_once "classes/Search.php";
+    include_once "controllers/ProductController.php";
     include_once "header.php";
+    $search = new ProductController();
 ?>
 
 <html lang="en">
@@ -10,12 +11,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel = "stylesheet" href = "stylesheet/products.css">
     <title>
-        Search
+        Search - Results
     </title>
 </head>
 <body>
-    <?php if(isset($_GET['submitName'])) {
-            $search = new Search(); ?>
+    <?php if(isset($_GET['submitName'])) { ?>
             <?php foreach($search->viewSearchedProducts($_GET['value']) as $product) { ?>
                 <a href = "View.php?id=<?php echo $product['id'] ?>"><div class = "products" >
                 <h3><?php echo $product['name'] ?></h3>

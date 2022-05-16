@@ -1,0 +1,37 @@
+.add-products-form {
+    margin:70px auto;
+    width:470px;
+    height:370px;
+    background:white;
+    border: 2px solid rgb(163, 33, 33);
+    border-radius: 20px;
+    display:table;
+}
+
+.add-products-form form {
+    width: 100px;
+    margin-left: 75px;
+    margin-top: 10px;
+}
+
+.add-products-form input {
+    padding: 5px;
+    margin: 10px;
+    width: 300px;
+}
+
+.add-products-form #butt {
+    margin-top: 10px;
+    margin-left: 100px;
+    padding: 7px;
+    width: 120px;
+    background:none;
+    border: 2px solid rgb(163, 33, 33);
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.add-products-form #butt:hover {
+    color: white;
+    background: rgb(163, 33, 33);
+}

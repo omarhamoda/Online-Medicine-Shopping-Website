@@ -1,7 +1,5 @@
 <?php 
     include_once "header.php";
-    include_once "classes/Admin.php";
-    $admin = new Admin();
 ?>
 
 <html lang="en">
@@ -28,7 +26,13 @@
             <th>Third Product URL</th>
             <th>Total Cost</th>
             </tr></thead>
-        <?php foreach($admin->viewBills() as $bill) { ?>
+        <?php
+        include_once "controllers/AccountController.php";
+        $accountC = new AccountController();
+        if($accountC->viewAccountTypeById() == "admin"){
+            include_once "controllers/AdminController.php";
+            $admin = new AdminController();
+        foreach($admin->viewBills() as $bill) { ?>
             <tbody><tr>
             <td><?php echo $bill['id']; ?></th>
             <td><?php echo $bill['userId']; ?></th>
@@ -41,6 +45,24 @@
             <td><a href = "View.php?id=<?php echo $bill['product3']; ?>">Go to Product</a></th>
             <td><?php echo $bill['totalCost']; ?></th>
             </tr></tbody>
+        <?php } ?>
+       <?php } else { 
+            include_once "controllers/BillController.php";
+            $userBill = new BillController(); 
+            foreach($userBill->viewUserBills($_COOKIE['id']) as $bill) { ?>
+                <tbody><tr>
+                <td><?php echo $bill['id']; ?></th>
+                <td><?php echo $bill['userId']; ?></th>
+                <td><?php echo $bill['fname']; ?></th>
+                <td><?php echo $bill['product1']; ?></th>
+                <td><a href = "View.php?id=<?php echo $bill['product1']; ?>">Go to Product</a></th>
+                <td><?php echo $bill['product2']; ?></th>
+                <td><a href = "View.php?id=<?php echo $bill['product2']; ?>">Go to Product</a></th>
+                <td><?php echo $bill['product3']; ?></th>
+                <td><a href = "View.php?id=<?php echo $bill['product3']; ?>">Go to Product</a></th>
+                <td><?php echo $bill['totalCost']; ?></th>
+                </tr></tbody>
+            <?php } ?>
         <?php } ?>
         </table>
 </body>

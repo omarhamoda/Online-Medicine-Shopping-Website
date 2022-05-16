@@ -1,7 +1,7 @@
 <?php 
     include_once "header.php";
-    include_once "classes/Admin.php";
-    $admin = new Admin();
+    include_once "controllers/AdminController.php";
+    $admin = new AdminController();
 ?>
 
 <html lang="en">
