@@ -1,14 +1,12 @@
 
 <?php
-    include_once "classes/Add.php";
     if(isset($_POST['submit'])) {
         $image = file_get_contents($_FILES['image']['tmp_name']);
         $image = addslashes($image);
         $data = array($_POST['name'], $_POST['category'], $_POST['description'], $image, $_POST['price'],  $_POST['quantity'],  $_POST['supplier']);
-        $product = new Product();
-        if($product->add($data)) {
-            header("Location: Home.php");
-        }
+        include_once "controllers/AddController.php";
+        $product = new AddController();
+        $product->addProduct($data);
     }
     include_once "header.php";
 ?>

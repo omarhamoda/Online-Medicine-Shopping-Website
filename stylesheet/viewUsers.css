@@ -1,0 +1,33 @@
+.table-content {
+    border-collapse: collapse;
+    margin: 50px auto;
+    font-size: 0.9em;
+    min-width: 400px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(182, 178, 178, 0.83);
+}
+
+.table-content thead tr{
+    background-color: rgb(163, 33, 33);
+    color: white;
+    text-align: left;
+    font-weight: bold;
+}
+
+.table-content td, th {
+    padding: 12px 13px;
+}
+
+.table-content tbody tr {
+    border-bottom: 1px solid rgba(182, 180, 180, 0.842);
+    color: white;
+}
+
+.table-content tbody tr:nth-of-type(even) {
+    background-color:rgb(99, 98, 98);
+}
+
+.table-content tbody tr:last-of-type {
+    border-bottom: 3px solid rgb(163, 33, 33);
+}

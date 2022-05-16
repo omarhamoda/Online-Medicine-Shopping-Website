@@ -1,12 +1,9 @@
 <?php
-    include "classes/Update.php";
-    include "classes/ProductModel.php";
-    $updateProduct = new Product();
     if(isset($_POST['submit'])) {
+        include "controllers/UpdateController.php";
+        $updateProduct = new UpdateController();
         $updateData = array($_POST['name'], $_POST['category'], $_POST['description'], $_POST['price'], $_POST['quantity'], $_GET['id']);
-        if($updateProduct->update($updateData)){
-            header("Location: Home.php");
-        }
+        $updateProduct->updateProduct($updateData);
     }
     include_once "header.php";
 ?>
@@ -21,8 +18,9 @@
 </head>
 <body>
     <?php
-    $productDetails = new ProductModel();
-     foreach($productDetails->getProductDetails($_GET['id']) as $productDetails) { ?>
+    include_once "controllers/ProductController.php";
+    $productDetails = new ProductController();
+     foreach($productDetails->viewProductDetails($_GET['id']) as $productDetails) { ?>
         <div class = "add-products-form">
             <form action = "update-products.php?id=<?php echo $productDetails['id']; ?>" method = "post">
                 <input type = "text" name = "name" placeholder = "Product Name" value = "<?php echo $productDetails['name']; ?>">
