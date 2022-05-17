@@ -5,7 +5,7 @@
         function getUsers() {
             $sql = "select * from accounts";
             return $this->executeSelectStatementt($sql);
-        }
+        } 
 
         function getBills() {
             $sql = "select * from customerbills join accounts on customerbills.userId = accounts.id";
