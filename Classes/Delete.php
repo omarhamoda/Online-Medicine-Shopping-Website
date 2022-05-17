@@ -11,7 +11,7 @@
             return $modify->executeStatement($sql);
         }
     }
-
+ 
     class Cart implements Delete{
         function delete($userId) {
             $sql = "DELETE FROM `cart` WHERE `userId` = $userId";
